@@ -50,8 +50,7 @@ CTRL.getCategory = (req, res) => {
 
 CTRL.createCategory = (req, res) => {
   const newCategory = new Category({
-    nameCategory: req.body.nameCategory,
-    status: req.body.status,
+    ...req.body,
   });
 
   console.log(newCategory);

@@ -49,7 +49,10 @@ CTRL.login = (req, res) => {
 //Đăng ký tài khoản
 CTRL.register = async(req, res) => {
     const passwordHash = await bcrypt.hash(req.body.password, 12);
-    const newUser = new User({...req.body, password: passwordHash });
+    const newUser = new User({...req.body,  password: passwordHash });
+    if (req.file) {
+		newUser.avatar = req.file.path;
+	}
     const refresh_token = createAccessToken({ id: newUser._id });
     try {
         const savedUser = await newUser.save();
